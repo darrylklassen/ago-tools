@@ -41,6 +41,7 @@ import csv
 import argparse
 import sys
 import json
+from operator import itemgetter
 from agoTools.admin import Admin
 
 def _raw_input(prompt=None, stream=None, input=None):
@@ -136,6 +137,7 @@ else:
     pBookmarks =agoAdmin.createBookmarksFromLayer(args.layerURL,args.labelfield)
 
 if pBookmarks!=None:
+    pBookmarks = sorted(pBookmarks,key=itemgetter('name'))
     agoAdmin.addBookmarksToWebMap(pBookmarks,args.itemid);
 else:
     print "No Bookmarks were found."
